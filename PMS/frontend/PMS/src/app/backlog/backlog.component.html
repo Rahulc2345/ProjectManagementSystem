@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>List of Backlogs</h2>
+    <table class="table table-striped">
+        <thead>
+             <tr>
+                <th >Project Id</th>
+                <th >Backlog Id</th>
+                <th >Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let backlog of backlogs">
+               <td>{{backlog.projectId}}</td>
+                    <td>{{backlog.backlogId}}</td>
+                    <td>{{backlog.title}}</td>
+                    <td><button class="btn" (click)="onClickDetail(backlog.projectId)">Details</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-success" (click)="addBacklog()">Add Backlog</button>
+    </div>
+</div>
+
+<!--<ng-container>
+    <select *ngFor="let project of projects">
+        <option></option>
+    </select>
+</ng-container>-->
+
+<div *ngIf="isEnable">
+        <app-add-backlog  [projects]="projects" (addEmit)="getBacklogList()" (cancelEmit)="onBacklogCancel()"></app-add-backlog>
+</div>

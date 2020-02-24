@@ -1,0 +1,19 @@
+<p>{{message}}</p>
+<div *ngIf="!isAssigned">
+    <label for="taskId">Task</label>
+    <select id="task" [(ngModel)]="taskId">
+        <ng-container *ngFor="let t of tasks">
+            <option *ngIf="!t.userId" value="{{t.taskId}}">{{t.title}} </option>
+        </ng-container>   
+    </select>
+
+    <label for="userId">Developer</label>
+    <select id="user" [(ngModel)]="userId">
+        <option *ngFor="let u of users" value="{{u.id}}">{{u.name}} | {{u.role}}</option>
+    </select>
+
+    <div class="col-xs-12">
+        <button class="btn btn-success" (click)="onAssignTask()"> Assign</button>
+        <button class="btn btn-danger" (click)="onCancelTask()"> Cancel</button>
+    </div>
+</div>

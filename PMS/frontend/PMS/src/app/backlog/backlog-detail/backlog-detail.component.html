@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-xs-12">
+        <table>
+            <caption>List of Backlogs</caption>
+            <tr>
+                <th>Project Id</th>
+                <th>Backlog Id</th>
+                <th>Title</th>
+                <th>Requirements</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+            </tr>
+            <tbody>
+                <tr *ngFor="let backlog of backlogs">
+                    <td><input type="text" [disabled]="enableEdit.backlogId!=backlog.backlogId " [(ngModel)]="backlog.projectId"
+                            value="backlog.projectId" /></td>
+                    <td><input type="text" [disabled]="enableEdit.backlogId!=backlog.backlogId " [(ngModel)]="backlog.backlogId"
+                            value="backlog.backlogId" /></td>
+                    <td><input type="text" [disabled]="enableEdit.backlogId!=backlog.backlogId " [(ngModel)]="backlog.title"
+                            value="backlog.title" /></td>    
+                    <td><input type="text" [disabled]="enableEdit.backlogId!=backlog.backlogId " [(ngModel)]="backlog.requirement"
+                            value="backlog.requirement" /></td>
+                    <td><input type="Date" [disabled]="enableEdit.backlogId!=backlog.backlogId " [(ngModel)]="backlog.created_at"
+                            value="backlog.created_at" /></td>
+                    <td><input type="Date" [disabled]="enableEdit.backlogId!=backlog.backlogId " [(ngModel)]="backlog.updated_at"
+                            value="backlog.updated_at" /></td>
+                    <td>
+                        <button class="btn" *ngIf="enableEdit.backlogId!=backlog.backlogId" (click)="onClickEdit(backlog)">Edit</button>
+                        <button class="btn" *ngIf="enableEdit.backlogId==backlog.backlogId" (click)="onClickUpdate(backlog)">Update</button>
+                        <button class="btn" *ngIf="enableEdit.backlogId==backlog.backlogId" (click)="onClickCancel()">Cancel</button>
+                        <button class="btn" (click)="onClickDelete(backlog.backlogId)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!--<ng-container *ngFor="let backlog of backlogs">
+    <div class="row" *ngIf="isEnable">
+        <app-add-backlog [backlog]="backlog"></app-add-backlog>
+    </div>
+</ng-container>-->
+
+

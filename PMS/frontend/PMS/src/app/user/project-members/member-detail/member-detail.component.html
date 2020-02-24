@@ -1,0 +1,202 @@
+<div class="container">
+    <ng-container>
+        <div class="container bootstrap snippet">
+            <div class="panel-body inf-content">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img alt="" style="width:200px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/user-453533-fdadfd.png"
+                            data-original-title="Usuario">
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Information</strong><br>
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-responsive table-user-information">
+                                <tbody *ngFor="let u of user">
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                Identification                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{u.id}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-user  text-primary"></span>    
+                                Name                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{u.name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+                                Username                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{u.username}}
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+                                Role                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{u.role}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                Email                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{u.email}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                Contact                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{u.mobile_number}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-star text-primary"></span>
+                                Status                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{u.status}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-secondary" (click)="showProject(u.id)">Projects</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-secondary" (click)="onClickChat(u.id)">Chat</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <p style="color: red">{{msg}}</p>
+                            <table class="table table-condensed table-responsive table-user-information">
+                                <tbody *ngFor="let project of projects">
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                <span class="glyphicon glyphicon-th-list text-primary"></span>
+                                Projects                                                
+                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{project.name}}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-secondary" (click)="showProjectDetail(project.id)">Tasks</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 style="color: red">{{errorMsg}}</h5>
+                        <ng-container *ngIf="showTasks">
+                            <div class="">
+                                <h2>Assigned Tasks</h2>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>to do</th>
+                                            <th>in process</th>
+                                            <th>complete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <ng-container *ngFor="let task of tasks">
+                                                    <div class="card " style="max-width: 18rem;" *ngIf="task.status=='to_do'">
+                                                        <div class="card-header {{getPriority(task.priority)}}">{{"0"+projectId}}{{"-"+task.backlogId}}{{"-"+task.taskId}}</div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Task title: {{task.title}}</h5>
+                                                            <h5 class="card-title" *ngIf="task.userId">Currently assigned to: {{task.userId}}</h5>
+                                                            <h5 class="card-title" *ngIf="!task.userId">Currently assigned to:
+                                                                <span style="color: blue">Task has not been assigned </span></h5>
+                                                            <h5 class="card-title">Task description: {{task.desc}}</h5>
+                                                        </div>
+
+                                                        <br>
+                                                    </div>
+                                                </ng-container>
+                                            </td>
+                                            <td>
+                                                <ng-container *ngFor="let task of tasks">
+                                                    <div class="card" style="width: 18rem;" *ngIf="task.status=='Incomplete'">
+                                                        <div class="card-header {{getPriority(task.priority)}}">{{"0"+projectId}}{{"-"+task.backlogId}}{{"-"+task.taskId}}</div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Task title: {{task.title}}</h5>
+                                                            <h5 class="card-title" *ngIf="task.userId">Currently assigned to: {{task.userId}}</h5>
+                                                            <h5 class="card-title" *ngIf="!task.userId">Currently assigned to:
+                                                                <span style="color: blue">Task has not been assigned </span></h5>
+                                                            <h5 class="card-title">Task description: {{task.desc}}</h5>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+                                                </ng-container>
+                                            </td>
+                                            <td>
+                                                <ng-container *ngFor="let task of tasks">
+                                                    <div class="card" style="width: 18rem;" *ngIf="task.status=='completed'">
+                                                        <div class="card-header {{getPriority(task.priority)}}">{{"0"+projectId}}{{"-"+task.backlogId}}{{"-"+task.taskId}}</div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Task title: {{task.title}}</h5>
+                                                            <h5 class="card-title" *ngIf="task.userId">Currently assigned to: {{task.userId}}</h5>
+                                                            <h5 class="card-title" *ngIf="!task.userId">Currently assigned to:
+                                                                <span style="color: blue">Task has not been assigned </span></h5>
+                                                            <h5 class="card-title">Task description: {{task.desc}}</h5>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+                                                </ng-container>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+
+<div *ngIf="enableChat">
+    <app-chat [userId]="userId" (cancelChat)="onCancelChat()"></app-chat>
+</div>

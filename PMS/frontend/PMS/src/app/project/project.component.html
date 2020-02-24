@@ -1,0 +1,19 @@
+<div class="container">
+    <h4 style="color: red">{{msg}}</h4>
+    <h2>Projects</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Project Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of projects">
+                <td>{{project.id}}</td>
+                <td>{{project.name}}</td>
+                <td><button class="btn" (click)="onClickDetails(project.id)">Details</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

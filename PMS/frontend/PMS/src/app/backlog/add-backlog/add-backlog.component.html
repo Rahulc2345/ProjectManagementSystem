@@ -1,0 +1,73 @@
+
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="hide" style="width: 400px;">
+            <form [formGroup]="addBackLogForm" (ngSubmit)="submitForm()">
+                <table>
+
+                    <div class="form-group">
+                        <label for="projectId">Project Id</label>
+                        <select  class="form-control" formControlName="projectId" data-toggle="tooltip" data-placement="right" title="project Id"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                            <option *ngFor="let project of projects" [ngValue]="project.id">{{project.id}}</option>
+                        <div *ngIf="submitted && f.projectId.errors" class="invalid-feedback">
+                            <div *ngIf="f.projectId.errors.required" class="alert alert-danger">project is required</div>
+                        </div>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backlogId">Backlog Id</label>
+                        <input type="text" class="form-control" formControlName="backlogId" data-toggle="tooltip" data-placement="right" title="Backlog Id"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.backlogId.errors" class="invalid-feedback">
+                            <div *ngIf="f.backlogId.errors.required" class="alert alert-danger">Backlog is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">title</label>
+                        <input type="text" class="form-control" formControlName="title" data-toggle="tooltip" data-placement="right" title="title"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                            <div *ngIf="f.title.errors.required" class="alert alert-danger">title is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                        <input type="text" class="form-control" formControlName="requirement" data-toggle="tooltip" data-placement="right" title="requirement"
+                            [ngClass]="{ 'is-invalid': submitted }">
+                        <div *ngIf="submitted && f.requirement.errors" class="invalid-feedback">
+                            <div *ngIf="f.requirement.errors.required" class="alert alert-danger">requirement is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">created Date</label>
+                        <input type="Date" class="form-control" formControlName="created_at" data-toggle="tooltip" data-placement="right" title="created Date"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.created_at.errors" class="invalid-feedback">
+                            <div *ngIf="f.created_at.errors.required" class="alert alert-danger">creation Date is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">updated date</label>
+                        <input type="Date" class="form-control" formControlName="updated_at" data-toggle="tooltip" data-placement="right" title="updated date"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.updated_at.errors" class="invalid-feedback">
+                            <div *ngIf="f.updated_at.errors.required" class="alert alert-danger">updated date is required</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button class="btn btn-danger" (click)="onclickCancel()">Cancel</button>
+                    </div>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

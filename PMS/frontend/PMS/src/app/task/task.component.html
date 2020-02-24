@@ -1,0 +1,153 @@
+<div class="row" *ngIf="isAdmin">
+    <div class="div col-xs-12">
+        <button class="btn btn-success" type="button" (click)="addTask()">Create Task</button>
+        <button class="btn btn-success" type="button" (click)="assignTask()">Assign Task</button>
+    </div>
+
+    <div class="div col-xs-12" *ngIf='enableAdd'>
+        <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+    </div>
+</div>
+<div>
+    <div class="col-xs-12">
+        <app-add-task [projectId]="projectId" [backlogId]='backlogId' (added)="getTasks()" (canceled)="onCancelAdd()" *ngIf="isAdd"></app-add-task>
+        <app-assign-task *ngIf="isAssign" (assigned)="getTasks()"></app-assign-task>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Project Tasks</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>to do</th>
+                <th>in process</th>
+                <th>complete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <ng-container *ngFor="let task of tasks">
+                        <div class="card " style="max-width: 18rem;" *ngIf="task.status=='to_do'">
+                            <div class="card-header {{getPriority(task.priority)}}">{{"0"+projectId}}{{"-"+task.backlogId}}{{"-"+task.taskId}}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Task title: {{task.title}}</h5>
+                                <h5 class="card-title" *ngIf="task.userId">Currently assigned to: {{task.userId}}</h5>
+                                <h5 class="card-title" *ngIf="!task.userId">Currently assigned to:
+                                    <span style="color: blue">Task has not been assigned </span></h5>
+                                <h5 class="card-title">Task description: {{task.desc}}</h5>
+                                <button class="btn btn-success" *ngIf="updateTask.taskId!=task.taskId" (click)="showUpdateTask(task)">update</button>
+                                <button class="btn btn-danger" *ngIf="updateTask.taskId!=task.taskId" (click)="deleteTask(task)">delete</button>
+                            </div>
+                            <app-update-task *ngIf="task.taskId==updateTask.taskId" [task]="task" (cancelUpdate)="cancelUpdateTask()" [task]="task" (updateTask)="getTasks()"></app-update-task>
+                            <br>
+                        </div>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngFor="let task of tasks">
+                        <div class="card" style="width: 18rem;" *ngIf="task.status=='Incomplete'">
+                            <div class="card-header {{getPriority(task.priority)}}">{{"0"+projectId}}{{"-"+task.backlogId}}{{"-"+task.taskId}}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Task title: {{task.title}}</h5>
+                                <h5 class="card-title" *ngIf="task.userId">Currently assigned to: {{task.userId}}</h5>
+                                <h5 class="card-title" *ngIf="!task.userId">Currently assigned to:
+                                    <span style="color: blue">Task has not been assigned </span></h5>
+                                <h5 class="card-title">Task description: {{task.desc}}</h5>
+                                <button class="btn btn-success" *ngIf="updateTask.taskId!=task.taskId" (click)="showUpdateTask(task)">update </button>
+                                <button class="btn btn-danger" *ngIf="updateTask.taskId!=task.taskId" (click)="deleteTask(task)">delete</button>
+                            </div>
+                            <app-update-task *ngIf="task.taskId==updateTask.taskId" [task]="task" (cancelUpdate)="cancelUpdateTask()" (updateTask)="getTasks()"></app-update-task>
+                            <br>
+                        </div>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngFor="let task of tasks">
+                        <div class="card" style="width: 18rem;" *ngIf="task.status=='completed'">
+                            <div class="card-header {{getPriority(task.priority)}}">{{"0"+projectId}}{{"-"+task.backlogId}}{{"-"+task.taskId}}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Task title: {{task.title}}</h5>
+                                <h5 class="card-title" *ngIf="task.userId">Currently assigned to: {{task.userId}}</h5>
+                                <h5 class="card-title" *ngIf="!task.userId">Currently assigned to:
+                                    <span style="color: blue">Task has not been assigned </span></h5>
+                                <h5 class="card-title">Task description: {{task.desc}}</h5>
+                                <button class="btn btn-success" *ngIf="updateTask.taskId!=task.taskId" (click)="showUpdateTask(task)">update  </button>
+                                <button class="btn btn-danger" *ngIf="updateTask.taskId!=task.taskId" (click)="deleteTask(task)">delete</button>
+                            </div>
+                            <app-update-task *ngIf="task.taskId==updateTask.taskId" [task]="task" (cancelUpdate)="cancelUpdateTask()" (updateTask)="getTasks()"></app-update-task>
+                            <br>
+                        </div>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!--<div class="row">
+    <ng-container *ngFor="let task of tasks">
+        <table>
+            <tr>
+                <td>
+                    <div class="col-4" *ngIf="task.status==='to_do'">
+                        <p>{{task.title}}</p>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-4" *ngIf="task.status=='Incomplete'">
+                        <p>{{task.title}}</p>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="col-4" *ngIf="task.status==='completed'">
+                        <p>{{task.title}}</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </ng-container>
+</div>-->
+
+
+<!--<div class="row">
+    <div class="col-xs-12">
+        <table>
+            <tr>
+                <td>
+                    <div class="row" *ngFor="let task of to_do_tasks">
+                        <div class="col-4">
+                            <div class="card h-100">
+                                {{task.title}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="row" *ngFor="let task of incomplete_tasks">
+                        <div class="col-4">
+                            <div class="card h-100">
+                                {{task.title}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="row" *ngFor="let task of completed_tasks">
+                        <div class="col-4">
+                            <div class="card h-100">
+                                {{task.title}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>-->

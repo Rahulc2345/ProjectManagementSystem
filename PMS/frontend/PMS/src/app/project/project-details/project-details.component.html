@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-xs-12">
+        <table mdbTable>
+            <caption>List of projects</caption>
+            <tr>
+                <th scope="col">Manager Id</th>
+                <th scope="col">Project Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Team Member</th>
+                <th scope="col">Scrum Master</th>
+                <th scope="col">Status</th>
+            </tr>
+            <tbody>
+                <tr mdbTableCol *ngFor="let proj of project">
+                    <td><input type="number" [disabled]="enableEdit.id!=proj.id " [(ngModel)]="proj.managerId" value="proj.managerId"
+                        /></td>
+                    <td><input type="number" [disabled]="enableEdit.id!=proj.id " [(ngModel)]="proj.id" value="proj.id" name="{{project.id}}"
+                        /></td>
+                    <td><input type="text" [disabled]="enableEdit.id!=proj.id " [(ngModel)]="proj.name" value="proj.name" /></td>
+                    <td><input type="number" [disabled]="enableEdit.id!=proj.id " [(ngModel)]="proj.team_member" value="proj.team_member"
+                        /></td>
+                    <td><input type="text" [disabled]="enableEdit.id!=proj.id " [(ngModel)]="proj.scrum_master" value="proj.scrum_master"
+                        /></td>
+                    <td><input type="text" [disabled]="enableEdit.id!=proj.id " [(ngModel)]="proj.status" value="proj.status"
+                        /></td>
+                    <td *ngIf="isAdmin">
+                        <button class="btn" *ngIf="enableEdit.id!=proj.id" (click)="onClickEdit(proj)">Edit</button>
+                        <button class="btn" *ngIf="enableEdit.id==proj.id" (click)="onClickUpdate(proj)">Update</button>
+                        <button class="btn" *ngIf="enableEdit.id==proj.id" (click)="onClickCancel()">Cancel</button>
+                        <button class="btn" (click)="onClickDelete(proj.id)">Delete</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary" routerLink="/project-members/:projectId" (click)="onMemberClick(proj.id)">View Members</button>
+                        <button class="btn" routerLink="/chat/:projectId" (click)="onGroupClick(proj.id)">Discuss Project Progress</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <app-task [projectId]="projectId"></app-task>
+</div>

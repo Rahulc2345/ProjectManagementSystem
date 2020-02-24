@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xs-12">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+            <tr *ngFor="let u of user">
+                <td><input type="number" [disabled]="enableEdit.id!=u.id" [(ngModel)]="u.id" value="u.id"
+                 /></td>
+                <td><input type="text" [disabled]="enableEdit.id!=u.id" [(ngModel)]="u.name" value="u.name"
+                    /></td>
+                <td><input type="number" [disabled]="enableEdit.id!=u.id" [(ngModel)]="u.mobile_number" value="u.mobile_number"
+                    /></td>
+                <td><input type="text" [disabled]="enableEdit.id!=u.id" [(ngModel)]="u.email" value="u.email"
+                    /></td>
+                <td><input type="text" [disabled]="enableEdit.id!=u.id" [(ngModel)]="u.username" value="u.username"
+                    /></td>
+                <td><input type="text" [disabled]="enableEdit.id!=u.id" [(ngModel)]="u.role" value="u.role"
+                    /></td>
+                
+                <td><input type="text" [disabled]="enableEdit.id!=u.id" [(ngModel)]="u.status" value="u.status"
+                    /></td>    
+                <td>
+                    <button class="btn" *ngIf="enableEdit.id!=u.id" (click)="onClickEdit(u)">Edit</button>
+                    <button class="btn" *ngIf="enableEdit.id==u.id" (click)="onClickUpdate(u)">Update</button>
+                    <button class="btn" *ngIf="enableEdit.id==u.id" (click)="onClickCancel()">Cancel</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

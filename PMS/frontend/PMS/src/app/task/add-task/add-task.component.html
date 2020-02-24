@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="hide" style="width: 400px;">
+            <form [formGroup]="addTaskForm" (ngSubmit)="submitForm()">
+                <table>
+                    <!--<td colspan="100px">
+                        <div class="form-group">
+                            <label for="backlogId">Backlog Id</label>
+                            <input type="text" value="{{backlogId}}" class="form-control" formControlName="backlogId" data-toggle="tooltip" data-placement="right" title="Backlog Id"
+                                [ngClass]="{ 'is-invalid': submitted}">
+                                <option *ngFor="let task of tasks" value='{{task.backlogId}}'>{{task.backlogId}}</option>
+                            <div *ngIf="submitted && f.backlogId.errors" class="invalid-feedback">
+                                <div *ngIf="f.backlogId.errors.required" class="alert alert-danger">Backlog is required</div>
+                            </div>
+                            
+                        </div>
+                    </td>-->
+
+                    <div class="form-group">
+                        <label for="name"> Task Id</label>
+                        <input type="text" class="form-control" formControlName="taskId" data-toggle="tooltip" data-placement="right" title="Task Id"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.taskId.errors" class="invalid-feedback">
+                            <div *ngIf="f.taskId.errors.required" class="alert alert-danger">Task Id is required</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="name">title</label>
+                        <input type="text" class="form-control" formControlName="title" data-toggle="tooltip" data-placement="right" title="title"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                            <div *ngIf="f.title.errors.required" class="alert alert-danger">title is required</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                        <input type="text" class="form-control" formControlName="desc" data-toggle="tooltip" data-placement="right" title="Description"
+                            [ngClass]="{ 'is-invalid': submitted }">
+                        <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+                            <div *ngIf="f.desc.errors.required" class="alert alert-danger">Description is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Start Date</label>
+                        <input type="Date" class="form-control" formControlName="startDate" data-toggle="tooltip" data-placement="right" title="Start Date"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.startDate.errors.required" class="alert alert-danger">Start Date is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">End Date</label>
+                        <input type="Date" class="form-control" formControlName="endDate" data-toggle="tooltip" data-placement="right" title="End Date"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                        <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.endDate.errors.required" class="alert alert-danger">End Date is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Priority</label>
+                        <select type="text" class="form-control" formControlName="priority" data-toggle="tooltip" data-placement="right" title="Priority"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                             <option value='1' >High</option> 
+                             <option value='2' >Medium</option>   
+                             <option value='3' >Low</option> 
+                            <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">
+                                <div *ngIf="f.priority.errors.required" class="alert alert-danger">Priority is required</div>
+                            </div>
+                            </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Status</label>
+                        <select type="text" class="form-control" formControlName="status" data-toggle="tooltip" data-placement="left" title="Status"
+                            [ngClass]="{ 'is-invalid': submitted}">
+                            <option value='to_do' >To do</option> 
+                            <option value='Incomplete' >In progress</option>   
+                            <option value='completed' >Completed</option>  
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required" class="alert alert-danger">Status is required</div>
+                            </div>
+                            </select>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button class="btn btn-danger" (click)="onclickCancel()">Cancel</button>
+                    </div>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
