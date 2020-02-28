@@ -1,12 +1,12 @@
-var project_controller=require('../controller/projectController');
-var user_controller=require('../controller/userController');
-var task_controller=require('../controller/taskController');
-var backlog_controller=require('../controller/backlogController');
-var chat_controller=require('../controller/chatController');
+var project_controller = require('../controller/projectController');
+var user_controller = require('../controller/userController');
+var task_controller = require('../controller/taskController');
+var backlog_controller = require('../controller/backlogController');
+var chat_controller = require('../controller/chatController');
 
-var express=require('express');
-var util= require('../util/jwtUtil')
-var route=express.Router();
+var express = require('express');
+var util = require('../util/jwtUtil')
+var route = express.Router();
 
 route.get('/projects', util.checkToken, project_controller.getProjects);
 route.get('/projects/:id', project_controller.getProjectById);
@@ -38,6 +38,7 @@ route.get('/users', user_controller.getUsers);
 route.get('/users/:id', user_controller.getUserById);
 route.get('/users/project/:id', user_controller.getUsersByProjectId);
 route.post('/users/add', user_controller.registerUser);
+route.put('/users/assign-project/:id', user_controller.setProject)
 route.put('/users/update/:id', user_controller.updateUser);
 route.delete('/users/delete/:id', user_controller.deleteUser);
 
@@ -48,4 +49,4 @@ route.get('/chats/:id', chat_controller.getChatByGroup)
 route.post('/chats/add', chat_controller.insertChat)
 
 
-module.exports=route;
+module.exports = route;

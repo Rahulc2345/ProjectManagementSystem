@@ -1,0 +1,21 @@
+<p style="color: red">{{message}}</p>
+<div *ngIf="!isAssigned">
+    <label for="projectId">Project</label>
+    <select id="project" [(ngModel)]="projectId">
+        <option *ngFor="let project of projects" value="{{project.id}}">{{project.name}} </option>
+    </select>
+
+    <label for="userId">Developer</label>
+    <select id="user" [(ngModel)]="userId">
+        <ng-container *ngFor="let u of users"> 
+            <option *ngIf="!u.projectId" value="{{u.id}}">{{u.name}} | {{u.role}}</option>
+        </ng-container>
+    </select>
+
+
+
+    <div class="col-xs-12">
+        <button class="btn btn-success" (click)="onAssignProject()"> Assign</button>
+        <button class="btn btn-danger" routerLink="/home"> Cancel</button>
+    </div>
+</div>

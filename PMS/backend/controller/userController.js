@@ -162,5 +162,23 @@ exports.getUsersByProjectId = (req, resp) => {
     })
 }
 
+exports.setProject = (req, resp) => {
+    user.findOneAndUpdate({ 'id': req.params.id },
+        {
+            $set: {
+                projectId: req.body.projectId
+            }
+        }, (err, data) => {
+            if (err) {
+                console.log(err)
+                resp.json("could not update" + err)
+            }
+            else {
+                console.log(data);
+                resp.json("Project has been assigned to user")
+            }
+        })
+}
+
 
 
